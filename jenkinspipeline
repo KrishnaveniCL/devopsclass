@@ -23,6 +23,6 @@ node {
    }
    stage ('deploy'){
    echo 'deployment started'
-       sh "scp ec2-user@172.31.17.8: /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war /opt/apache-tomcat-8.5.57/webapps"
+       sh "$ scp ec2-user@172.31.17.8: /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war /opt/apache-tomcat-8.5.57/webapps"
    }
 }
