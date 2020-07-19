@@ -21,8 +21,17 @@ node {
       
       archive 'target/*.war'
    }
-   stage ('deploy'){
-   echo 'deployment started'
-       sh "scp /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war root@18.191.137.33:/opt/tomcat/apache-tomcat-8.5.57/webapps"
-   }
-}
+   // stage ('deploy'){
+   // echo 'deployment started'
+      // sh "scp /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war root@18.191.137.33:/opt/tomcat/apache-tomcat-8.5.57/webapps"
+      
+     // }
+      stage('Copy requiredfile to deployment'){
+        sshagent(['jenkins-ssh-to-root']){
+            sh "ssh -o StrictHostKeyChecking=no root@18.191.137.33"
+            sh "scp -r /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war root@18.191.137.33:/opt/tomcat/apache-tomcat-8.5.57/webapps"
+        }
+    }
+ }
+      
+
